@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
+import Dropzone from '@/components/Dropzone'
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <h1>RoadAI</h1>
+        <Dropzone />
       </main>
     </>
   )
