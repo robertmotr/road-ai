@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
-import Dropzone from '@/components/Dropzone'
+import Dropzone from '@/components/Dropzone/Dropzone'
+import Navbar from '@/components/Navbar/Navbar'
+import Hero from '@/components/Hero/Hero'
 
 export default function Home() {
   return (
@@ -12,7 +14,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <h1>RoadAI</h1>
+        <Navbar />
+        <Hero />
         <Dropzone />
       </main>
     </>

@@ -1,0 +1,24 @@
+.hero {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header {
+    font-size: 15vw;
+    font-weight: 500;
+}
+.image {
+    width: 17.5vw;
+    height: 17.5vw;
+}
+.text {
+    font-size: 2.75vw;
+}
