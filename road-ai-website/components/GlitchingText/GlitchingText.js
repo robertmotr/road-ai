@@ -61,6 +61,12 @@ export default function GlitchingText({ staticText, strings }) {
     });
 
     return (
-        <h3>{staticText}{currentText}</h3>
+        <h3 className="text">{staticText}{currentText}
+            <style jsx>{`
+                .text {
+                    font-size: max(2.5vw, 15px);
+                }
+            `}</style>
+        </h3>
     )
 }

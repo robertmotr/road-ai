@@ -5,3 +5,34 @@
   align-items: center;
   min-height: 100vh;
 }
+
+.outer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 70vw;
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.text {
+  font-size: 17.5px;
+}
+
+.bold_text {
+  font-size: 35px;
+  font-weight: 900;
+  align-self: baseline;
+}
+
+.image {
+  width: max(25vw, 200px);
+  height: 100%;
+}

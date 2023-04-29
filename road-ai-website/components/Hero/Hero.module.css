@@ -20,5 +20,6 @@
     height: 17.5vw;
 }
 .text {
-    font-size: 2.75vw;
+    font-size: max(2.75vw, 17.5px);
+    padding: 0px 50px;
 }
