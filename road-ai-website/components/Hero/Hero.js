@@ -20,7 +20,7 @@ export default function Hero() {
             <br/>
             <p className={styles.text}>A Deerhacks project by</p>
             <GlitchingText
-                strings={["Arian Sadeghi", "Muhammad Hamza", "Robert Montrogeanu", "Ziad Zananiri"]}
+                strings={["Arian Sadeghi", "Muhammad Hamza", "Robert Motrogeanu", "Ziad Zananiri"]}
             />
         </section>
     )
