@@ -13,6 +13,8 @@ class ProcessImage:
         self.velocities = {}
         self.infile = infile
         self.outfile = outfile
+        self.crashed = False
+        self.frameCrashed = None
 
 
 
@@ -51,7 +53,8 @@ class ProcessImage:
                     continue
                 if velocity != 0.0 and self.velocities[key] != 0.0 and abs(self.velocities[key] - velocity) > 20:
                     self.ser = serial.Serial(port='COM3', baudrate=115200, timeout=.1)
-                    print("CRASH")
+                    self.crashed = True
+                    self.frameCrashed = frame_number
                 self.velocities[key] = velocity
         self.prev_objects = objects.copy()
         self.prev = output_array
@@ -65,11 +68,13 @@ class ProcessImage:
         video_detector.loadModel()
 
 
-        detections = video_detector.detectObjectsFromVideo(input_file_path=os.path.join(execution_path, self.infile),
-                                                           output_file_path=os.path.join(execution_path, self.outfile),
+        detections = video_detector.detectObjectsFromVideo(input_file_path=self.infile,
+                                                           output_file_path=self.outfile,
                                                            frames_per_second=20,
                                                            minimum_percentage_probability=30,
                                                            return_detected_frame=True,
                                                            per_frame_function=self.forFrame,
                                                            log_progress=True,
                                                            frame_detection_interval=5)
+
+        return self.crashed, self.frameCrashed
