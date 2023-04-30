@@ -82,7 +82,7 @@ export default function Home() {
         <script dangerouslySetInnerHTML={{__html: `
           document.getElementById("vid3").play();
         `}} />
-
+        <br/><br/>
         <Dropzone />
         <br/><br/>
       </main>
