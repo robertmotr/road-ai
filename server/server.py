@@ -10,8 +10,8 @@ import base64
 app = Flask(__name__)
 
 ALLOWED_EXTENSIONS = ['mp4', 'mov', 'avi', '.mkv', '.wmv', '.flv', '.webm', '.gif', '.jpg', '.jpeg', '.png', '.bmp', '.svg', '.mp3', '.wav', '.ogg', '.m4a', '.flac', '.aac', '.wma', '.zip', '.rar', '.tar', '.gz', '.7z', '.bz2', '.xz', '.pdf', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx', '.odt', '.ods', '.odp', '.txt', '.rtf', '.tex', '.wks', '.wps', '.wpd', '.key', '.odf', '.psd', '.ai', '.eps', '.ps', '.svg', '.tiff', '.tif', '.jpg', '.jpeg', '.png', '.bmp', '.gif', '.webp', '.svg', '.ico', '.heic', '.mp4', '.mov', '.avi', '.mkv', '.wmv', '.flv', '.webm', '.mp3', '.wav', '.ogg', '.m4a', '.flac', '.aac', '.wma', '.zip', '.rar', '.tar', '.gz', '.7z', '.bz2', '.xz', '.pdf', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx', '.odt', '.ods', '.odp', '.txt', '.rtf', '.tex', '.wks', '.wps', '.wpd', '.key', '.odf', '.psd', '.ai', '.eps', '.ps', '.svg', '.tiff', '.tif', '.jpg', '.jpeg', '.png', '.bmp', '.gif', '.webp', '.svg', '.ico', '.heic']
-OUTPUT_DESTINATION = os.getcwd() + '/output'
-INPUT_DESTINATION = os.getcwd() + '/input'
+OUTPUT_DESTINATION = os.getcwd() + '\server\output'
+INPUT_DESTINATION = os.getcwd() + '\server\input'
 
 def process_video(inpath: str, outpath:str) -> None:
    event = threading.Event()
@@ -55,8 +55,9 @@ def upload_handler():
             encoded_video = base64.urlsafe_b64encode(video_data).decode()
 
          # when process_video returns, we can finally send back the data to the client
-         response_data = {'bool': output[0], 'int': output[1], 'encoded_video': encoded_video}
-         print("done")
+         response_data = {'crashed': output[0], 'frame': output[1], 'encoded_video': encoded_video}
+         text = "COLLISION OCCURRED" if output[0] else "NO COLLISION OCCURRED"
+         print(f"{text}")
          return jsonify(response_data), 200
 
       else:
@@ -65,4 +66,4 @@ def upload_handler():
       return "you shouldn't be sending a get request to this link :)", 400
 
 if __name__ == '__main__':
-   app.run(debug=True)
+   app.run(debug=False)
