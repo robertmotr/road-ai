@@ -63,16 +63,7 @@ def upload_handler():
       else:
          return 'Invalid file type', 400
    else:
-      return "you shouldn't be sending a get request to this link :)"
-   
-
-@app.route('/use-link', methods=['POST'])
-def link_handler():
-   if request.method == 'POST':
-      return "todo later xd"
-   else:
-      return "you shouldn't be sending a get request to this link :)"
-
+      return "you shouldn't be sending a get request to this link :)", 400
 
 if __name__ == '__main__':
    app.run()

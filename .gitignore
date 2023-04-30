@@ -42,3 +42,4 @@ next-env.d.ts
 
 *.10
 *.pyc
+server/yolov3.pt
