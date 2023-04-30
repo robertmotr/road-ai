@@ -52,7 +52,11 @@ class ProcessImage:
                     self.velocities[key] = velocity
                     continue
                 if velocity != 0.0 and self.velocities[key] != 0.0 and abs(self.velocities[key] - velocity) > 20:
-                    self.ser = serial.Serial(port='COM3', baudrate=115200, timeout=.1)
+                    self.ser = serial.Serial(port='/dev/ttyUSB0', baudrate=115200, timeout=.1)
+                    self.ser.write(b'1')
+
+                    print("self.ser printed")
+
                     self.crashed = True
                     self.frameCrashed = frame_number
                 self.velocities[key] = velocity
