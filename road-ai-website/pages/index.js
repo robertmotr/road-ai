@@ -12,7 +12,6 @@ export default function Home() {
         <title>RoadAI</title>
         <meta name="description" content="An AI driven tool for detecting car crashes in intersections" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/red-lens.png" />
       </Head>
       <main className={styles.main}>
         <Navbar />
@@ -45,7 +44,7 @@ export default function Home() {
           </div>
           <p className={styles.bold_text}>RoadAI</p>
           <div className={styles.inner}>
-            <p className={styles.text}>An increasing number of intersections are being equipped with cameras, mainly for speeding purposes. However, these cameras can also be used to detect collisions and automatically alert emergency services, <b>cutting down on response time</b> and <b>potentially saving lives.</b></p>
+            <p className={styles.text}>An increasing number of intersections are being equipped with cameras, mainly for speeding purposes. However, these cameras can also be used to detect collisions and automatically alert emergency services, <b>cutting down on response time</b> and <b>saving more lives.</b></p>
             <Image
               className={styles.image}
               src="/speed-camera.jpg"
@@ -56,10 +55,33 @@ export default function Home() {
             />
           </div>
           <p className={styles.text}><b>This is exactly what RoadAI can do</b></p>
-          <p className={styles.text}>RoadAI utilizes AI-driven computer vision technology to track and analyse the movement of vehicles through intersections and detect potential collisions.</p>
+          <p className={styles.text}>RoadAI utilizes AI-driven computer vision technology to track and analyse the movement of vehicles through intersections and detect potential collisions the moment they occur.</p>
         </div>
         <br/><br/>
-        {/* Ziad you're stuff goes below this */}
+        <div className={styles.video_container}>
+          <video autoplay loop muted playsinline id="vid1">
+            <source src="/vid1.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <video autoplay loop muted playsinline id="vid2">
+            <source src="/vid2.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <video autoplay loop muted playsinline id="vid3">
+            <source src="/vid3.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <script dangerouslySetInnerHTML={{__html: `
+          document.getElementById("vid1").play();
+        `}} />
+        <script dangerouslySetInnerHTML={{__html: `
+          document.getElementById("vid2").play();
+        `}} />
+        <script dangerouslySetInnerHTML={{__html: `
+          document.getElementById("vid3").play();
+        `}} />
 
         <Dropzone />
         <br/><br/>
