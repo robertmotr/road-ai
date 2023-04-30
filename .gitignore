@@ -1,17 +1,23 @@
 # dependencies
 /road-ai-website/node_modules
+/node_modules
 /road-ai-website/.pnp
+/.pnp
 .pnp.js
 
 # testing
 /road-ai-website/coverage
+/coverage
 
 # next.js
-# /.next/
+/.next/
+/road-ai-website/.next/
 /road-ai-website/out/
+/out/
 
 # production
 /road-ai-website/build
+/build
 
 # misc
 .DS_Store
