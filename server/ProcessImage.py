@@ -122,7 +122,7 @@ class ProcessImage:
         """
         video_detector = VideoObjectDetection()
         video_detector.setModelTypeAsYOLOv3()
-        video_detector.setModelPath(os.path.join(execution_path, "yolov3.pt"))
+        video_detector.setModelPath(execution_path + "\server\yolov3.pt")
         video_detector.loadModel()
 
         video_detector.detectObjectsFromVideo(input_file_path=self.infile,

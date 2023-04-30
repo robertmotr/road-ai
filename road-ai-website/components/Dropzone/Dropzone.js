@@ -5,31 +5,44 @@ export default function Dropzone() {
     const videoElementRef = useRef();
 
     const selectedFile = useRef();
-    const onChangeHandler = event => {
-        selectedFile.current = event.target.files[0];
-    }
+    const fileContent = useRef();
+
+    const handleFileRead = (event) => {
+        fileContent.current = btoa(event.target.result);
+    };
 
     const handleSubmit = event => {
         event.preventDefault();
-        const formData = new FormData();
-        formData.append('video', selectedFile);
+        const file = selectedFile.current.files[0];
+        const reader = new FileReader();
+        reader.onloadend = handleFileRead;
+        reader.readAsBinaryString(file);
         
-        fetch('http://localhost:5000/upload-video', {
+        const formData = new FormData();
+        formData.append('video', fileContent.current);
+        formData.append('name', file.name);
+        // send the JSON data in the request body
+        fetch('http://127.0.0.1:5000/upload-video', {
+            mode: 'no-cors',
             method: 'POST',
             body: formData
         })
         .then(response => response.json())
         .then(data => {
+            console.log(data)
+            console.log("hello")
             // access the response data and do something with it
             const boolValue = data.bool;
             const intValue = data.int;
             const videoData = atob(data.encoded_video); // decode the base64-encoded video data
+            console.log(videoData)
 
             videoElementRef.current.src = 'data:video/mp4;base64,' + videoData;
 
             videoElementRef.current.play();
         })
         .catch(error => {
+            console.log(error)
             // Handle errors
         });
     }
@@ -39,7 +52,7 @@ export default function Dropzone() {
             <form onSubmit={handleSubmit} className={styles.form}>
                 <label>
                     Upload your own video!<br/><br/>
-                    <input type="file" name="file" accept="video/*" onChange={onChangeHandler} />
+                    <input type="file" name="file" ref={selectedFile} accept="video/*" />
                 </label>
                 <br/><br/>
                 <button className={styles.button} type="submit" >Upload</button>
