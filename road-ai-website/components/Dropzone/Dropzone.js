@@ -19,8 +19,8 @@ export default function Dropzone() {
         reader.readAsBinaryString(file);
         
         const formData = new FormData();
-        formData.append('video', fileContent.current);
-        formData.append('name', file.name);
+        formData.append('video', file);
+        //formData.append('name', file.name);
         // send the JSON data in the request body
         fetch('http://127.0.0.1:5000/upload-video', {
             mode: 'no-cors',
