@@ -1,0 +1,15 @@
+.form {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    border-width: 2px;
+    border-style: dashed;
+    border-color: rgba(0, 0, 0, 0.25);
+
+    padding: 20px 40px;
+    width: 50vw;
+}
+
+.button {
+    width: 100%;
+    height: 30px;
+}

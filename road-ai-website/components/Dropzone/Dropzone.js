@@ -1,4 +1,5 @@
 import React, {useRef} from "react";
+import styles from "./Dropzone.module.css"
 
 export default function Dropzone() {
     const selectedFile = useRef();
@@ -14,13 +15,13 @@ export default function Dropzone() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={styles.form}>
             <label>
-                Upload a video: <br/><br/>
+                Upload your own video!<br/><br/>
                 <input type="file" name="file" accept="video/*" onChange={onChangeHandler} />
             </label>
             <br/><br/>
-            <button type="submit">Upload</button>
+            <button className={styles.button} type="submit" >Upload</button>
         </form>
     )
 }

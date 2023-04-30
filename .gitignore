@@ -10,6 +10,8 @@
 /coverage
 
 # next.js
+.next/
+.next
 /.next/
 /road-ai-website/.next/
 /road-ai-website/out/
