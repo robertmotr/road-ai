@@ -59,15 +59,15 @@ export default function Home() {
         </div>
         <br/><br/>
         <div className={styles.video_container}>
-          <video autoplay loop muted playsinline id="vid1">
+          <video autoPlay loop muted playsInline id="vid1">
             <source src="/vid1.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-          <video autoplay loop muted playsinline id="vid2">
+          <video autoPlay loop muted playsInline id="vid2">
             <source src="/vid2.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-          <video autoplay loop muted playsinline id="vid3">
+          <video autoPlay loop muted playsInline id="vid3">
             <source src="/vid3.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
