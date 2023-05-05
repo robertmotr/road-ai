@@ -15,18 +15,11 @@ export default function Dropzone() {
             mode: 'no-cors',
             method: 'POST',
             body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-        })
-        .catch(error => {
-            console.log(error)
-        });
+        }).catch(console.error);
     }
 
     return (
-        <form onSubmit={handleSubmit} className={styles.form}>
+        <form enctype="multipart/form-data" onSubmit={handleSubmit} className={styles.form}>
             <label>
                 Upload your own video!<br/><br/>
                 <input type="file" name="file" ref={selectedFile} accept="video/*" />

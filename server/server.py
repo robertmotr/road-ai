@@ -1,4 +1,5 @@
 from flask import Flask, request, flash, redirect, url_for, jsonify, send_file
+from io import BytesIO
 from typing import *
 import threading
 import time
@@ -36,34 +37,54 @@ def is_valid_file(filename: str) -> bool:
 @app.route('/upload-video', methods=['POST'])
 def upload_handler():
    if request.method == 'POST':
-      if 'video' not in request.files:
-         return 'No file part', 400
       file = request.files['video']
-      if file.filename == '':
-         return 'No selected file', 400
-      if file.filename and is_valid_file(file.filename):
-         data = file.stream.read()
+      print(f"Processing {file.filename}")
 
-         with open(os.path.join(INPUT_DESTINATION, file.filename), 'wb') as f:
-            f.write(data)
+      input_data = file.read()
+      with open(os.path.join(INPUT_DESTINATION, file.filename), 'wb') as f:
+         f.write(input_data)
 
-         # run algorithm on the file path
-         output = process_video(os.path.join(INPUT_DESTINATION, file.filename), os.path.join(OUTPUT_DESTINATION, file.filename.split('.')[0]))
+      # running algorithm on file
+      crashed, crash_frame = process_video(os.path.join(INPUT_DESTINATION, file.filename), os.path.join(OUTPUT_DESTINATION, file.filename.split('.')[0]))
 
-         with open(os.path.join(OUTPUT_DESTINATION, file.filename), 'rb') as f:
-            video_data = f.read()
-            encoded_video = base64.urlsafe_b64encode(video_data).decode()
+      with open(os.path.join(OUTPUT_DESTINATION, file.filename), 'rb') as f:
+         output_data = f.read()
+      
+      return send_file(BytesIO(output_data), download_name=f"processed-{file.filename}", as_attachment=True)
+   return "Cannot handle this request", 400
 
-         # when process_video returns, we can finally send back the data to the client
-         response_data = {'crashed': output[0], 'frame': output[1], 'encoded_video': encoded_video}
-         text = "COLLISION OCCURRED" if output[0] else "NO COLLISION OCCURRED"
-         print(f"{text}")
-         return jsonify(response_data), 200
+   # return send_from_directory(directory=OUTPUT_DESTINATION, path=file.filename, as_attachment=True)
 
-      else:
-         return 'Invalid file type', 400
-   else:
-      return "you shouldn't be sending a get request to this link :)", 400
+
+   # if request.method == 'POST':
+   #    if 'video' not in request.files:
+   #       return 'No file part', 400
+   #    file = request.files['video']
+   #    if file.filename == '':
+   #       return 'No selected file', 400
+   #    if file.filename and is_valid_file(file.filename):
+   #       data = file.stream.read()  # file.read() ??
+
+   #       with open(os.path.join(INPUT_DESTINATION, file.filename), 'wb') as f:
+   #          f.write(data)
+
+   #       # run algorithm on the file path
+   #       output = process_video(os.path.join(INPUT_DESTINATION, file.filename), os.path.join(OUTPUT_DESTINATION, file.filename.split('.')[0]))
+
+   #       with open(os.path.join(OUTPUT_DESTINATION, file.filename), 'rb') as f:
+   #          video_data = f.read()
+   #          encoded_video = base64.urlsafe_b64encode(video_data).decode()
+
+   #       # when process_video returns, we can finally send back the data to the client
+   #       response_data = {'crashed': output[0], 'frame': output[1], 'encoded_video': encoded_video}
+   #       text = "COLLISION OCCURRED" if output[0] else "NO COLLISION OCCURRED"
+   #       print(f"{text}")
+   #       return jsonify(response_data), 200
+
+   #    else:
+   #       return 'Invalid file type', 400
+   # else:
+   #    return "you shouldn't be sending a get request to this link :)", 400
 
 if __name__ == '__main__':
-   app.run(debug=False)
+   app.run(port=5000, debug=True)
